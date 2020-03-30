@@ -1,4 +1,4 @@
-import * as ethUtil from 'ethereumjs-util';
+import * as ethUtil from 'cfx-util';
 import * as ethAbi from 'ethereumjs-abi';
 import * as nacl from 'tweetnacl';
 import * as naclUtil from 'tweetnacl-util';
@@ -96,7 +96,7 @@ const TypedDataUtils = {
           // eslint-disable-next-line no-eq-null
           return ['bytes32', value == null ?
             '0x0000000000000000000000000000000000000000000000000000000000000000' :
-            ethUtil.sha3(this.encodeData(type, value, types, useV4))];
+            ethUtil.keccak(this.encodeData(type, value, types, useV4))];
         }
 
         if (value === undefined) {
@@ -104,7 +104,7 @@ const TypedDataUtils = {
         }
 
         if (type === 'bytes') {
-          return ['bytes32', ethUtil.sha3(value)];
+          return ['bytes32', ethUtil.keccak(value)];
         }
 
         if (type === 'string') {
@@ -112,13 +112,13 @@ const TypedDataUtils = {
           if (typeof value === 'string') {
             value = Buffer.from(value, 'utf8');
           }
-          return ['bytes32', ethUtil.sha3(value)];
+          return ['bytes32', ethUtil.keccak(value)];
         }
 
         if (type.lastIndexOf(']') === type.length - 1) {
           const parsedType = type.slice(0, type.lastIndexOf('['));
           const typeValuePairs = value.map((item) => encodeField(name, parsedType, item));
-          return ['bytes32', ethUtil.sha3(ethAbi.rawEncode(
+          return ['bytes32', ethUtil.keccak(ethAbi.rawEncode(
             typeValuePairs.map(([t]) => t),
             typeValuePairs.map(([, v]) => v),
           ))];
@@ -138,7 +138,7 @@ const TypedDataUtils = {
         if (value !== undefined) {
           if (field.type === 'bytes') {
             encodedTypes.push('bytes32');
-            value = ethUtil.sha3(value);
+            value = ethUtil.keccak(value);
             encodedValues.push(value);
           } else if (field.type === 'string') {
             encodedTypes.push('bytes32');
@@ -146,11 +146,11 @@ const TypedDataUtils = {
             if (typeof value === 'string') {
               value = Buffer.from(value, 'utf8');
             }
-            value = ethUtil.sha3(value);
+            value = ethUtil.keccak(value);
             encodedValues.push(value);
           } else if (types[field.type] !== undefined) {
             encodedTypes.push('bytes32');
-            value = ethUtil.sha3(this.encodeData(field.type, value, types, useV4));
+            value = ethUtil.keccak(this.encodeData(field.type, value, types, useV4));
             encodedValues.push(value);
           } else if (field.type.lastIndexOf(']') === field.type.length - 1) {
             throw new Error('Arrays currently unimplemented in encodeData');
@@ -217,7 +217,7 @@ const TypedDataUtils = {
    * @returns {Buffer} - Hash of an object
    */
   hashStruct (primaryType: string, data: object, types: object, useV4 = true): Buffer {
-    return ethUtil.sha3(this.encodeData(primaryType, data, types, useV4));
+    return ethUtil.keccak(this.encodeData(primaryType, data, types, useV4));
   },
 
   /**
@@ -228,7 +228,7 @@ const TypedDataUtils = {
    * @returns {Buffer} - Hash of an object
    */
   hashType (primaryType: string, types: object): Buffer {
-    return ethUtil.sha3(this.encodeType(primaryType, types));
+    return ethUtil.keccak(this.encodeType(primaryType, types));
   },
 
   /**
@@ -263,7 +263,7 @@ const TypedDataUtils = {
     if (sanitizedData.primaryType !== 'EIP712Domain') {
       parts.push(this.hashStruct(sanitizedData.primaryType, sanitizedData.message, sanitizedData.types, useV4));
     }
-    return ethUtil.sha3(Buffer.concat(parts));
+    return ethUtil.keccak(Buffer.concat(parts));
   },
 };
 
@@ -274,7 +274,7 @@ function concatSig (v: Buffer, r: Buffer, s: Buffer): string {
   const rStr = padWithZeroes(ethUtil.toUnsigned(rSig).toString('hex'), 64);
   const sStr = padWithZeroes(ethUtil.toUnsigned(sSig).toString('hex'), 64);
   const vStr = ethUtil.stripHexPrefix(ethUtil.intToHex(vSig));
-  return ethUtil.addHexPrefix(rStr.concat(sStr, vStr)).toString('hex');
+  return ethUtil.addHexPrefix(rStr.concat(sStr, vStr));
 }
 
 function normalize (input: number | string): string {
@@ -297,10 +297,10 @@ function normalize (input: number | string): string {
 }
 
 function personalSign<T extends MessageTypes> (privateKey: Buffer, msgParams: MsgParams<TypedData | TypedMessage<T>>): string {
-  const message = ethUtil.toBuffer(msgParams.data);
+  const message = Buffer.from(msgParams.data);
   const msgHash = ethUtil.hashPersonalMessage(message);
   const sig = ethUtil.ecsign(msgHash, privateKey);
-  const serialized = ethUtil.bufferToHex(concatSig(sig.v, sig.r, sig.s));
+  const serialized = concatSig(ethUtil.toBuffer(sig.v), sig.r, sig.s);
   return serialized;
 }
 
@@ -324,7 +324,7 @@ function externalTypedSignatureHash (typedData: EIP712TypedData[]): string {
 function signTypedDataLegacy<T extends MessageTypes> (privateKey: Buffer, msgParams: MsgParams<TypedData | TypedMessage<T>>): string {
   const msgHash = typedSignatureHash(msgParams.data);
   const sig = ethUtil.ecsign(msgHash, privateKey);
-  return ethUtil.bufferToHex(concatSig(sig.v, sig.r, sig.s));
+  return concatSig(ethUtil.toBuffer(sig.v), sig.r, sig.s);
 }
 
 function recoverTypedSignatureLegacy<T extends MessageTypes> (msgParams: SignedMsgParams<TypedData | TypedMessage<T>>): string {
@@ -487,13 +487,13 @@ function recoverTypedMessage<T extends MessageTypes> (msgParams: SignedMsgParams
 function signTypedData<T extends MessageTypes> (privateKey: Buffer, msgParams: MsgParams<TypedData | TypedMessage<T>>): string {
   const message = TypedDataUtils.sign(msgParams.data, false);
   const sig = ethUtil.ecsign(message, privateKey);
-  return ethUtil.bufferToHex(concatSig(sig.v, sig.r, sig.s));
+  return concatSig(ethUtil.toBuffer(sig.v), sig.r, sig.s);
 }
 
 function signTypedData_v4<T extends MessageTypes> (privateKey: Buffer, msgParams: MsgParams<TypedData | TypedMessage<T>>): string {
   const message = TypedDataUtils.sign(msgParams.data);
   const sig = ethUtil.ecsign(message, privateKey);
-  return ethUtil.bufferToHex(concatSig(sig.v, sig.r, sig.s));
+  return concatSig(ethUtil.toBuffer(sig.v), sig.r, sig.s);
 }
 
 function recoverTypedSignature<T extends MessageTypes> (msgParams: SignedMsgParams<TypedData | TypedMessage<T>>): string {
@@ -568,12 +568,12 @@ function typedSignatureHash<T extends MessageTypes> (typedData: TypedData | Type
 
 function recoverPublicKey (hash: Buffer, sig: string): Buffer {
   const signature = ethUtil.toBuffer(sig);
-  const sigParams = ethUtil.fromRpcSig(signature);
+  const sigParams = ethUtil.fromRpcSig(ethUtil.addHexPrefix(signature.toString('hex')));
   return ethUtil.ecrecover(hash, sigParams.v, sigParams.r, sigParams.s);
 }
 
 function getPublicKeyFor<T extends MessageTypes> (msgParams: MsgParams<TypedData | TypedMessage<T>>): Buffer {
-  const message = ethUtil.toBuffer(msgParams.data);
+  const message = Buffer.from(msgParams.data);
   const msgHash = ethUtil.hashPersonalMessage(message);
   return recoverPublicKey(msgHash, msgParams.sig);
 }
@@ -592,5 +592,3 @@ function nacl_decodeHex (msgHex: string): Uint8Array {
   const msgBase64 = Buffer.from(msgHex, 'hex').toString('base64');
   return naclUtil.decodeBase64(msgBase64);
 }
-
-

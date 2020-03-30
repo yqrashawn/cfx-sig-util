@@ -1,5 +1,5 @@
 import * as test from 'tape';
-import * as ethUtil from 'ethereumjs-util';
+import * as ethUtil from 'cfx-util';
 import * as sigUtil from '..';
 
 test('normalize address lower cases', function (t) {
@@ -36,7 +36,7 @@ test('normalize an unsupported type throws', function (t) {
 
 test('personalSign and recover', function (t) {
   t.plan(1);
-  const address = '0x29c76e6ad8f28bb1004902578fb108c507be341b';
+  const address = '0x19c76e6ad8f28bb1004902578fb108c507be341b';
   console.log(`for address ${address}`);
   const privKeyHex = '4af1bceebf7f3634ec3cff8a2c38e51178d5d4ce585c52d6043e5e2cc3418bb0';
   const privKey = Buffer.from(privKeyHex, 'hex');
@@ -67,7 +67,7 @@ test('personalSign and extractPublicKey', function (t) {
 });
 
 test('signTypedDataLegacy and recoverTypedSignatureLegacy - single message', function (t) {
-  const address = '0x29c76e6ad8f28bb1004902578fb108c507be341b';
+  const address = '0x19c76e6ad8f28bb1004902578fb108c507be341b';
   const privKeyHex = '4af1bceebf7f3634ec3cff8a2c38e51178d5d4ce585c52d6043e5e2cc3418bb0';
 
   const privKey = Buffer.from(privKeyHex, 'hex');
@@ -91,7 +91,7 @@ test('signTypedDataLegacy and recoverTypedSignatureLegacy - single message', fun
 });
 
 test('signTypedDataLegacy as v1 and recoverTypedSignatureLegacy - single message', function (t) {
-  const address = '0x29c76e6ad8f28bb1004902578fb108c507be341b';
+  const address = '0x19c76e6ad8f28bb1004902578fb108c507be341b';
   const privKeyHex = '4af1bceebf7f3634ec3cff8a2c38e51178d5d4ce585c52d6043e5e2cc3418bb0';
 
   const privKey = Buffer.from(privKeyHex, 'hex');
@@ -116,7 +116,7 @@ test('signTypedDataLegacy as v1 and recoverTypedSignatureLegacy - single message
 
 test('signTypedDataLegacy and recoverTypedSignatureLegacy - multiple messages', function (t) {
   t.plan(1);
-  const address = '0x29c76e6ad8f28bb1004902578fb108c507be341b';
+  const address = '0x19c76e6ad8f28bb1004902578fb108c507be341b';
   const privKeyHex = '4af1bceebf7f3634ec3cff8a2c38e51178d5d4ce585c52d6043e5e2cc3418bb0';
 
   const privKey = Buffer.from(privKeyHex, 'hex');
@@ -240,8 +240,8 @@ signatureTest({
   testLabel: 'personalSign - kumavis fml manual test I',
   // "hello world"
   message: '0x68656c6c6f20776f726c64',
-  signature: '0xce909e8ea6851bc36c007a0072d0524b07a3ff8d4e623aca4c71ca8e57250c4d0a3fc38fa8fbaaa81ead4b9f6bd03356b6f8bf18bccad167d78891636e1d69561b',
-  addressHex: '0xbe93f9bacbcffc8ee6663f2647917ed7a20a57bb',
+  signature: '0x394d5aa8189fbe8cfb0f54c98899131d6addd1467152ca97f87094c233adec4c0da343ee79e190aebbd96b2a2b040f0b5092d28ee739f79ee25ccfa7c0d99bbb1c',
+  addressHex: '0x1e93f9bacbcffc8ee6663f2647917ed7a20a57bb',
   privateKey: Buffer.from('6969696969696969696969696969696969696969696969696969696969696969', 'hex'),
 });
 
@@ -249,8 +249,8 @@ signatureTest({
   testLabel: 'personalSign - kumavis fml manual test II',
   // some random binary message from parity's test
   message: '0x0cc175b9c0f1b6a831c399e26977266192eb5ffee6ae2fec3ad71c777531578f',
-  signature: '0x9ff8350cc7354b80740a3580d0e0fd4f1f02062040bc06b893d70906f8728bb5163837fd376bf77ce03b55e9bd092b32af60e86abce48f7b8d3539988ee5a9be1c',
-  addressHex: '0xbe93f9bacbcffc8ee6663f2647917ed7a20a57bb',
+  signature: '0x846a84446470b7ef76faf85299a679c4a0709925b38af203611a015536408cdf1afb8f1b2b6d229e1c6d1dfd6a7eb14f43558addf720d3d6da437c877738aff71b',
+  addressHex: '0x1e93f9bacbcffc8ee6663f2647917ed7a20a57bb',
   privateKey: Buffer.from('6969696969696969696969696969696969696969696969696969696969696969', 'hex'),
 });
 
@@ -260,8 +260,8 @@ signatureTest({
   // https://github.com/ethcore/parity/blob/5369a129ae276d38f3490abb18c5093b338246e0/rpc/src/v1/tests/mocked/eth.rs#L301-L317
   // note: their signature result is incorrect (last byte moved to front) due to a parity bug
   message: '0x0cc175b9c0f1b6a831c399e26977266192eb5ffee6ae2fec3ad71c777531578f',
-  signature: '0xa2870db1d0c26ef93c7b72d2a0830fa6b841e0593f7186bc6c7cc317af8cf3a42fda03bd589a49949aa05db83300cdb553116274518dbe9d90c65d0213f4af491b',
-  addressHex: '0xe0da1edcea030875cd0f199d96eb70f6ab78faf2',
+  signature: '0xa1569bb3575f20e2a8ea066733e24c51d09860285f67fdf528df73c2a861e446647978469eb425d411ac9f8005fb63b9cc3effcdc2e1fe8961256d0fad1c88ba1b',
+  addressHex: '0x10da1edcea030875cd0f199d96eb70f6ab78faf2',
   privateKey: Buffer.from('4545454545454545454545454545454545454545454545454545454545454545', 'hex'),
 });
 
@@ -487,7 +487,7 @@ test('signedTypeData', (t) => {
   };
 
   const utils = sigUtil.TypedDataUtils;
-  const privateKey = ethUtil.sha3('cow');
+  const privateKey = ethUtil.keccak('cow');
   const address = ethUtil.privateToAddress(privateKey);
   const sig = sigUtil.signTypedData(privateKey, { data: typedData });
 
@@ -503,7 +503,7 @@ test('signedTypeData', (t) => {
     '0xf2cee375fa42b42143804025fc449deafd50cc031ca257e0b194a650a912090f');
   t.equal(ethUtil.bufferToHex(utils.sign(typedData)),
     '0xbe609aee343fb3c4b28e1df9e632fca64fcfaede20f02e86244efddf30957bd2');
-  t.equal(ethUtil.bufferToHex(address), '0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826');
+  t.equal(ethUtil.bufferToHex(address), '0x1d2a3d9f938e13cd947ec05abc7fe734df8dd826');
   t.equal(sig, '0x4355c47d63924e8a72e509b65029052eb6c299d53a04e167c5775fd466751c9d07299936d304c153f6443dfa05f40ff007d72911b6f72307f996231605b915621c');
 });
 
@@ -549,7 +549,7 @@ test('signedTypeData with V3 string', (t) => {
   };
 
   const utils = sigUtil.TypedDataUtils;
-  const privateKey = ethUtil.sha3('cow');
+  const privateKey = ethUtil.keccak('cow');
   const address = ethUtil.privateToAddress(privateKey);
   const sig = sigUtil.signTypedMessage(privateKey, { data: typedData }, 'V3');
 
@@ -565,7 +565,7 @@ test('signedTypeData with V3 string', (t) => {
     '0xf2cee375fa42b42143804025fc449deafd50cc031ca257e0b194a650a912090f');
   t.equal(ethUtil.bufferToHex(utils.sign(typedData)),
     '0xbe609aee343fb3c4b28e1df9e632fca64fcfaede20f02e86244efddf30957bd2');
-  t.equal(ethUtil.bufferToHex(address), '0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826');
+  t.equal(ethUtil.bufferToHex(address), '0x1d2a3d9f938e13cd947ec05abc7fe734df8dd826');
   t.equal(sig, '0x4355c47d63924e8a72e509b65029052eb6c299d53a04e167c5775fd466751c9d07299936d304c153f6443dfa05f40ff007d72911b6f72307f996231605b915621c');
 });
 
@@ -667,10 +667,10 @@ test('signedTypeData_v4', (t) => {
   t.equal(ethUtil.bufferToHex(utils.sign(typedData)),
     '0xa85c2e2b118698e88db68a8105b794a8cc7cec074e89ef991cb4f5f533819cc2');
 
-  const privateKey = ethUtil.sha3('cow');
+  const privateKey = ethUtil.keccak('cow');
 
   const address = ethUtil.privateToAddress(privateKey);
-  t.equal(ethUtil.bufferToHex(address), '0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826');
+  t.equal(ethUtil.bufferToHex(address), '0x1d2a3d9f938e13cd947ec05abc7fe734df8dd826');
 
   const sig = sigUtil.signTypedData_v4(privateKey, { data: typedData });
 
@@ -776,10 +776,10 @@ test('signedTypeData_v4', (t) => {
   t.equal(ethUtil.bufferToHex(utils.sign(typedData)),
     '0xa85c2e2b118698e88db68a8105b794a8cc7cec074e89ef991cb4f5f533819cc2');
 
-  const privateKey = ethUtil.sha3('cow');
+  const privateKey = ethUtil.keccak('cow');
 
   const address = ethUtil.privateToAddress(privateKey);
-  t.equal(ethUtil.bufferToHex(address), '0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826');
+  t.equal(ethUtil.bufferToHex(address), '0x1d2a3d9f938e13cd947ec05abc7fe734df8dd826');
 
   const sig = sigUtil.signTypedData_v4(privateKey, { data: typedData });
 
@@ -869,10 +869,10 @@ test('signedTypeData_v4 with recursive types', (t) => {
   t.equal(ethUtil.bufferToHex(utils.sign(typedData)),
     '0x807773b9faa9879d4971b43856c4d60c2da15c6f8c062bd9d33afefb756de19c');
 
-  const privateKey = ethUtil.sha3('dragon');
+  const privateKey = ethUtil.keccak('dragon');
 
   const address = ethUtil.privateToAddress(privateKey);
-  t.equal(ethUtil.bufferToHex(address), '0x065a687103c9f6467380bee800ecd70b17f6b72f');
+  t.equal(ethUtil.bufferToHex(address), '0x165a687103c9f6467380bee800ecd70b17f6b72f');
 
   const sig = sigUtil.signTypedData_v4(privateKey, { data: typedData });
 
@@ -962,10 +962,10 @@ test('signedTypeMessage V4 with recursive types', (t) => {
   t.equal(ethUtil.bufferToHex(utils.sign(typedData)),
     '0x807773b9faa9879d4971b43856c4d60c2da15c6f8c062bd9d33afefb756de19c');
 
-  const privateKey = ethUtil.sha3('dragon');
+  const privateKey = ethUtil.keccak('dragon');
 
   const address = ethUtil.privateToAddress(privateKey);
-  t.equal(ethUtil.bufferToHex(address), '0x065a687103c9f6467380bee800ecd70b17f6b72f');
+  t.equal(ethUtil.bufferToHex(address), '0x165a687103c9f6467380bee800ecd70b17f6b72f');
 
   const sig = sigUtil.signTypedMessage(privateKey, { data: typedData }, 'V4');
 
