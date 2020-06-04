@@ -259,10 +259,10 @@ callsites@^3.0.0:
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
   integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
-cfx-util@^0.0.1-b:
-  version "0.0.1-b"
-  resolved "https://registry.yarnpkg.com/cfx-util/-/cfx-util-0.0.1-b.tgz#d286e8c954bbe64bd87e7960a6d7392ca952d882"
-  integrity sha512-2L0y2XpOgL8vF/EXfy2p8OeSJBHw3e8qb17E0ie8KoDVonJD7t3lj2KXXppsrIzeOLJoLyHgOO9O9L6EgyBmRg==
+cfx-util@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/cfx-util/-/cfx-util-0.0.1.tgz#db0df52b714e6718afab664fa3f769400610930d"
+  integrity sha512-3x73y3IzO9nv4aH1acsrzjerWfYnMcmNzLXxlCA3JZSl/qLfbwQsc8J0gEfc1YndJhjwyNTgfbeIk9bWBsdJFQ==
   dependencies:
     "@types/bn.js" "^4.11.3"
     bn.js "^4.11.0"
