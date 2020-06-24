@@ -30,8 +30,8 @@
   "homepage": "https://github.com/yqrashawn/cfx-sig-util#readme",
   "dependencies": {
     "buffer": "^5.2.1",
-    "cfx-util": "^0.0.1-b",
-    "elliptic": "^6.4.0",
+    "cfx-util": "^0.0.1",
+    "elliptic": "^6.5.3",
     "ethereumjs-abi": "0.6.5",
     "tweetnacl": "^1.0.0",
     "tweetnacl-util": "^0.15.0"

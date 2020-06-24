@@ -259,10 +259,10 @@ callsites@^3.0.0:
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
   integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
-cfx-util@^0.0.1-b:
-  version "0.0.1-b"
-  resolved "https://registry.yarnpkg.com/cfx-util/-/cfx-util-0.0.1-b.tgz#d286e8c954bbe64bd87e7960a6d7392ca952d882"
-  integrity sha512-2L0y2XpOgL8vF/EXfy2p8OeSJBHw3e8qb17E0ie8KoDVonJD7t3lj2KXXppsrIzeOLJoLyHgOO9O9L6EgyBmRg==
+cfx-util@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/cfx-util/-/cfx-util-0.0.1.tgz#db0df52b714e6718afab664fa3f769400610930d"
+  integrity sha512-3x73y3IzO9nv4aH1acsrzjerWfYnMcmNzLXxlCA3JZSl/qLfbwQsc8J0gEfc1YndJhjwyNTgfbeIk9bWBsdJFQ==
   dependencies:
     "@types/bn.js" "^4.11.3"
     bn.js "^4.11.0"
@@ -456,10 +456,23 @@ drbg.js@^1.0.1:
     create-hash "^1.1.2"
     create-hmac "^1.1.4"
 
-elliptic@^6.4.0, elliptic@^6.5.2:
+elliptic@^6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.5.2.tgz#05c5678d7173c049d8ca433552224a495d0e3762"
   integrity sha512-f4x70okzZbIQl/NSRLkI/+tteV/9WqL98zx+SQ69KbXxmVrmjwsNUPn/gYJJ0sHvEak24cZgHIPegRePAtA/xw==
+  dependencies:
+    bn.js "^4.4.0"
+    brorand "^1.0.1"
+    hash.js "^1.0.0"
+    hmac-drbg "^1.0.0"
+    inherits "^2.0.1"
+    minimalistic-assert "^1.0.0"
+    minimalistic-crypto-utils "^1.0.0"
+
+elliptic@^6.5.3:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.5.3.tgz#cb59eb2efdaf73a0bd78ccd7015a62ad6e0f93d6"
+  integrity sha512-IMqzv5wNQf+E6aHeIqATs0tOLeOTwj1QKbRcS3jBbYkl5oLAserA8yJTT7/VyHUYG91PRmPyeQDObKLPpeS4dw==
   dependencies:
     bn.js "^4.4.0"
     brorand "^1.0.1"
