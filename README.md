@@ -1,10 +1,10 @@
-# Eth-Sig-Util [![CircleCI](https://circleci.com/gh/MetaMask/eth-sig-util.svg?style=svg)](https://circleci.com/gh/MetaMask/eth-sig-util)
+# Cfx-Sig-Util [![CircleCI](https://circleci.com/gh/yqrashawn/cfx-sig-util.svg?style=svg)](https://circleci.com/gh/MetaMask/eth-sig-util)
 
 A small collection of ethereum signing functions.
 
 You can find usage examples [here](https://github.com/flyswatter/js-eth-personal-sign-examples)
 
-[Available on NPM](https://www.npmjs.com/package/eth-sig-util)
+[Available on NPM](https://www.npmjs.com/package/cfx-sig-util)
 
 ## Supported Signing Methods
 
@@ -15,8 +15,10 @@ Currently there is only one supported signing protocol. More will be added as st
 
 ## Installation
 
-```
-npm install eth-sig-util --save
+```sh
+npm install cfx-sig-util --save
+# or
+yarn add cfx-sig-util
 ```
 
 ## Methods

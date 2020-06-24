@@ -1,6 +1,6 @@
 {
   "name": "cfx-sig-util",
-  "version": "0.0.1-a",
+  "version": "0.0.2",
   "description": "A few useful functions for signing ethereum data",
   "main": "index.js",
   "files": [
