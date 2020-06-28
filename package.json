@@ -1,6 +1,6 @@
 {
   "name": "cfx-sig-util",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A few useful functions for signing ethereum data",
   "main": "index.js",
   "files": [
@@ -30,7 +30,7 @@
   "homepage": "https://github.com/yqrashawn/cfx-sig-util#readme",
   "dependencies": {
     "buffer": "^5.2.1",
-    "cfx-util": "^0.0.1-b",
+    "cfx-util": "^0.0.3",
     "elliptic": "^6.4.0",
     "ethereumjs-abi": "0.6.5",
     "tweetnacl": "^1.0.0",
