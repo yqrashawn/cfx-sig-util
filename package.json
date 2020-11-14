@@ -34,7 +34,7 @@
     "smokestack/shoe/sockjs/node-uuid": "^1.4.4"
   },
   "dependencies": {
-    "buffer": "^5.6.0",
+    "buffer": "^5.6.1",
     "cfx-util": ">=0.0.3",
     "elliptic": "^6.4.0",
     "ethereumjs-abi": "0.6.5",
