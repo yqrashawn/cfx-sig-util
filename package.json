@@ -3,11 +3,7 @@
   "version": "0.0.4",
   "description": "A few useful functions for signing ethereum data",
   "main": "index.js",
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "utils/"
-  ],
+  "files": ["index.js", "index.d.ts", "utils/"],
   "scripts": {
     "build": "tsc --project .",
     "lint": "eslint . --ext .ts,.js",
@@ -19,10 +15,7 @@
     "type": "git",
     "url": "https://github.com/yqrashawn/cfx-sig-util.git"
   },
-  "keywords": [
-    "ethereum",
-    "signature"
-  ],
+  "keywords": ["ethereum", "signature"],
   "author": "yqrashawn <namy.19@gmail.com>",
   "license": "ISC",
   "bugs": {
@@ -34,7 +27,7 @@
     "smokestack/shoe/sockjs/node-uuid": "^1.4.4"
   },
   "dependencies": {
-    "@cfxjs/abi": ">=0.0.1",
+    "@cfxjs/abi": ">=0.0.2",
     "buffer": "^5.6.0",
     "cfx-util": ">=0.0.4",
     "elliptic": "^6.4.0",
