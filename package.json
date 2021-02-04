@@ -30,7 +30,7 @@
     "@cfxjs/abi": ">=0.0.2",
     "buffer": "^5.6.0",
     "cfx-util": ">=0.0.4",
-    "elliptic": "^6.4.0",
+    "elliptic": "^6.5.4",
     "tweetnacl": "^1.0.0",
     "tweetnacl-util": "^0.15.0"
   },
